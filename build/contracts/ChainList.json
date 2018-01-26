@@ -817,8 +817,13 @@
       "events": {},
       "links": {},
       "address": "0x6bd6fc9b67f299927ff9bd476f858d66ee6cf97a"
+    },
+    "1516947647061": {
+      "events": {},
+      "links": {},
+      "address": "0x18f475cad5ee21b6eec8705ba43012c81b01c954"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-25T05:44:45.223Z"
+  "updatedAt": "2018-01-26T06:21:31.427Z"
 }
