@@ -816,37 +816,32 @@
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
   "networks": {
-    "1516774398139": {
+    "4224": {
       "events": {},
       "links": {},
-      "address": "0xb401c3ea008e7b2ac9bb7c0c67a50c05748091b0"
+      "address": "0xbb59d43c8e788a41c20745f2f23b58708f7df436"
     },
-    "1516776792011": {
+    "1517127172914": {
       "events": {},
       "links": {},
-      "address": "0x52f274efd8751f7eef06f44619a1034440872b51"
+      "address": "0x896f0d69c6d1e718c731e8fa104dc423f91ccd8e"
     },
-    "1516777242578": {
+    "1517145178448": {
       "events": {},
       "links": {},
-      "address": "0xf0782dc5b6ebfc968deef14627c900fdfa79ece9"
+      "address": "0x5acc15ea1a71c7531b6967279aacba8fa350ef48"
     },
-    "1516777538032": {
+    "1517148010112": {
       "events": {},
       "links": {},
-      "address": "0xe0e187784636a05506d21c63432a396b272e953e"
+      "address": "0xa2c1a8c13f44841d5c3bd905655b1716f0cfc2a3"
     },
-    "1516859036290": {
+    "1517149304609": {
       "events": {},
       "links": {},
-      "address": "0xd18e1e6c9b343a607b1cc2bfccb6109f14f60fa2"
-    },
-    "1516947647061": {
-      "events": {},
-      "links": {},
-      "address": "0x483fa49a16a1a78172fd8bb7d867a3a6e0f5d871"
+      "address": "0x896f0d69c6d1e718c731e8fa104dc423f91ccd8e"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-26T06:21:31.436Z"
+  "updatedAt": "2018-01-30T06:52:44.947Z"
 }
