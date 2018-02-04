@@ -64,23 +64,40 @@ App = {
              return;
          }
 
+         var seller         = article[0];
+         var buyer          = article[1];
+         var name           = article[2];
+         var description    = article[3];
+         var price          = web3.fromWei(article[4], "ether");
+
          // Retreive and clear the article placeholder
          var articlesRow = $('#articlesRow');
          articlesRow.empty();
 
          // Retreive and fill the article template
          var articleTemplate = $('#articleTemplate');
-         articleTemplate.find('.panel-title').text(article[1]);
-         articleTemplate.find('.article-description').text(article[2]);
-         articleTemplate.find('.article-price').text(web3.fromWei(article[3], "ether"));
+         articleTemplate.find('.panel-title').text(name);
+         articleTemplate.find('.article-description').text(description);
+         articleTemplate.find('.article-price').text(price);
+         articleTemplate.find('.btn-buy').attr('data-value', price);
 
-         var seller = article[0];
-
+         // seller
          if(seller == App.account) {
              seller = "You";
          }
-
          articleTemplate.find('.article-seller').text(seller);
+
+         // buyer
+         if(buyer == App.account) {
+             buyer = "You";
+         } else if (buyer == 0x0) {
+             buyer = "No one yet";
+         }
+         articleTemplate.find('.article-buyer').text(buyer);
+
+         if(seller == App.account || article[1] != 0x0) {
+             articleTemplate.find('.btn-buy').hide();
+         }
 
          articlesRow.append(articleTemplate.html());
      }).catch(function(err) {
@@ -121,10 +138,34 @@ App = {
         $("#events").append('<li class="list-group-item">' + event.args._name + ' is for sale' + '</li>');
         App.reloadArticles();
       });
+
+      instance.buyArticleEvent({}, {
+          fromBlock: 0,
+          toBlock: 'latest'
+      }).watch(function(error, event) {
+          $("#events").append('<li class="list-group-item">' + event.args._buyer + ' bought ' + event.args._name + '</li>');
+          App.reloadArticles();
+      });
     })
     .catch(console.error);
   },
+  buyArticle: function() {
+      event.preventDefault();
+      // retreive the price article
+      var _price = parseInt($(event.target).data('value'));
 
+      App.contracts.ChainList.deployed().then(function(instance) {
+          return instance.buyArticle({
+              from: App.account,
+              value: web3.toWei(_price, "ether"),
+              gas: 500000
+          }).then(function(result) {
+
+          }).catch(function(error) {
+              console.error(error);
+          });
+      })
+  }
 };
 
 $(function() {
