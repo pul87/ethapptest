@@ -49,6 +49,12 @@ contract ChainList {
         sellArticleEvent(articleCounter, msg.sender, _name, _price);
     }
 
+    // Modifiers
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
     // fetch the number of articles in the contract
     function getNumberOfArticles() public constant returns (uint) {
         return articleCounter;
@@ -113,8 +119,7 @@ contract ChainList {
         buyArticleEvent(_id, article.seller, article.buyer, article.name, article.price);
     }
 
-    function kill() public {
-        require(msg.sender == owner);
+    function kill() onlyOwner public {
         // refund all the remainings funds to the owner
         selfdestruct(owner);
     }
