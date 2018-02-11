@@ -76,7 +76,7 @@ App = {
 
              for(var i = 0; i < articleIDs.length; i++) {
                  var articleId = articleIDs[i];
-                 chainListInstance.articles(articleId).then(function(article) {
+                 chainListInstance.articles(articleId.toNumber()).then(function(article) {
                      App.displayArticle(
                          article[0], // id
                          article[1], // seller
@@ -144,24 +144,31 @@ App = {
  },
  // Listen for events raised from the contract
   listenToEvents: function() {
-    App.contracts.ChainList.deployed().then(function(instance) {
-      instance.sellArticleEvent({}, {
-        fromBlock: 0,
-        toBlock: 'latest'
-      }).watch(function(error, event) {
-        $("#events").append('<li class="list-group-item">' + event.args._name + ' is for sale' + '</li>');
-        App.reloadArticles();
-      });
+     App.contracts.ChainList.deployed().then(function(instance) {
+     instance.sellArticleEvent({}, {
+       fromBlock: 0,
+       toBlock: 'latest'
+     }).watch(function(error, event) {
+       if (!error) {
+         $("#events").append('<li class="list-group-item">' + event.args._name + ' is for sale' + '</li>');
+       } else {
+         console.error(error);
+       }
+       App.reloadArticles();
+     });
 
-      instance.buyArticleEvent({}, {
-          fromBlock: 0,
-          toBlock: 'latest'
-      }).watch(function(error, event) {
-          $("#events").append('<li class="list-group-item">' + event.args._buyer + ' bought ' + event.args._name + '</li>');
-          App.reloadArticles();
-      });
-    })
-    .catch(console.error);
+     instance.buyArticleEvent({}, {
+       fromBlock: 0,
+       toBlock: 'latest'
+     }).watch(function(error, event) {
+       if (!error) {
+         $("#events").append('<li class="list-group-item">' + event.args._buyer + ' bought ' + event.args._name + '</li>');
+       } else {
+         console.error(error);
+       }
+       App.reloadArticles();
+     });
+   });
   },
   buyArticle: function() {
       event.preventDefault();
